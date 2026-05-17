@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock - Multiple Time Zones</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="clock-style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">⏰ Digital Clock</div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">← Back to SocialX</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Theme Toggle -->
+    <div class="theme-toggle" id="themeToggle">
+        <span class="theme-icon">🌙</span>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Progress Bar -->
+        <div class="progress-bar" id="progressBar"></div>
+
+        <!-- Tabs Navigation -->
+        <div class="tabs-container">
+            <button class="tab-btn active" data-tab="clocks">🌍 World Clocks</button>
+            <button class="tab-btn" data-tab="stopwatch">⏱️ Stopwatch</button>
+            <button class="tab-btn" data-tab="timer">⏲️ Timer</button>
+            <button class="tab-btn" data-tab="alarm">🔔 Alarm</button>
+        </div>
+
+        <!-- World Clocks Tab -->
+        <section class="tab-content active" id="clocks-tab">
+            <h1 class="main-title">World Clock</h1>
+            <p class="subtitle">Current time across different time zones</p>
+
+            <!-- Controls -->
+            <div class="controls">
+                <div class="control-group">
+                    <label for="timezoneSelect">Add Time Zone:</label>
+                    <select id="timezoneSelect" class="timezone-select">
+                        <option value="">Select a timezone...</option>
+                        <optgroup label="Americas">
+                            <option value="America/New_York">New York (EST)</option>
+                            <option value="America/Chicago">Chicago (CST)</option>
+                            <option value="America/Denver">Denver (MST)</option>
+                            <option value="America/Los_Angeles">Los Angeles (PST)</option>
+                            <option value="America/Toronto">Toronto (EST)</option>
+                            <option value="America/Mexico_City">Mexico City (CST)</option>
+                            <option value="America/Sao_Paulo">São Paulo (BRT)</option>
+                            <option value="America/Buenos_Aires">Buenos Aires (ART)</option>
+                        </optgroup>
+                        <optgroup label="Europe">
+                            <option value="Europe/London">London (GMT)</option>
+                            <option value="Europe/Paris">Paris (CET)</option>
+                            <option value="Europe/Berlin">Berlin (CET)</option>
+                            <option value="Europe/Madrid">Madrid (CET)</option>
+                            <option value="Europe/Rome">Rome (CET)</option>
+                            <option value="Europe/Moscow">Moscow (MSK)</option>
+                            <option value="Europe/Istanbul">Istanbul (EET)</option>
+                        </optgroup>
+                        <optgroup label="Asia">
+                            <option value="Asia/Dubai">Dubai (GST)</option>
+                            <option value="Asia/Kolkata">India (IST)</option>
+                            <option value="Asia/Bangkok">Bangkok (ICT)</option>
+                            <option value="Asia/Hong_Kong">Hong Kong (HKT)</option>
+                            <option value="Asia/Shanghai">Shanghai (CST)</option>
+                            <option value="Asia/Tokyo">Tokyo (JST)</option>
+                            <option value="Asia/Seoul">Seoul (KST)</option>
+                            <option value="Asia/Singapore">Singapore (SGT)</option>
+                        </optgroup>
+                        <optgroup label="Australia & Pacific">
+                            <option value="Australia/Sydney">Sydney (AEDT)</option>
+                            <option value="Australia/Melbourne">Melbourne (AEDT)</option>
+                            <option value="Pacific/Auckland">Auckland (NZDT)</option>
+                            <option value="Australia/Perth">Perth (AWST)</option>
+                        </optgroup>
+                        <optgroup label="Africa">
+                            <option value="Africa/Cairo">Cairo (EET)</option>
+                            <option value="Africa/Johannesburg">Johannesburg (SAST)</option>
+                            <option value="Africa/Lagos">Lagos (WAT)</option>
+                            <option value="Africa/Nairobi">Nairobi (EAT)</option>
+                        </optgroup>
+                    </select>
+                    <button id="addBtn" class="btn-add">+ Add</button>
+                </div>
+            </div>
+
+            <!-- Clocks Grid -->
+            <div class="clocks-grid" id="clocksGrid">
+                <!-- Default clocks will be added here -->
+            </div>
+
+            <!-- Reset Button -->
+            <div class="button-group">
+                <button id="resetBtn" class="btn-reset">Reset to Default</button>
+            </div>
+        </section>
+
+        <!-- Digital Display Section -->
+        <section class="digital-display-section" id="digital-section">
+            <h2>Current Local Time</h2>
+            <div class="digital-display">
+                <div class="time" id="digitalTime">00:00:00</div>
+                <div class="date" id="digitalDate">Loading...</div>
+                <div class="timezone-info" id="timezoneInfo">Local Timezone</div>
+            </div>
+        </section>
+
+        <!-- Stopwatch Tab -->
+        <section class="tab-content" id="stopwatch-tab">
+            <h1 class="main-title">⏱️ Stopwatch</h1>
+            <div class="stopwatch-display">
+                <div class="stopwatch-time" id="stopwatchTime">00:00:00</div>
+                <div class="stopwatch-ms" id="stopwatchMS">00</div>
+            </div>
+            <div class="stopwatch-buttons">
+                <button id="startStopBtn" class="btn-control btn-start">Start</button>
+                <button id="resetStopwatchBtn" class="btn-control btn-reset">Reset</button>
+                <button id="lapBtn" class="btn-control btn-lap">Lap</button>
+            </div>
+            <div class="laps-container">
+                <h3>Laps</h3>
+                <div id="lapsList" class="laps-list"></div>
+            </div>
+        </section>
+
+        <!-- Timer Tab -->
+        <section class="tab-content" id="timer-tab">
+            <h1 class="main-title">⏲️ Timer</h1>
+            <div class="timer-inputs">
+                <div class="input-group">
+                    <label>Hours</label>
+                    <input type="number" id="timerHours" min="0" max="23" value="0">
+                </div>
+                <div class="input-group">
+                    <label>Minutes</label>
+                    <input type="number" id="timerMinutes" min="0" max="59" value="5">
+                </div>
+                <div class="input-group">
+                    <label>Seconds</label>
+                    <input type="number" id="timerSeconds" min="0" max="59" value="0">
+                </div>
+            </div>
+            <div class="timer-display">
+                <div class="timer-time" id="timerTime">00:05:00</div>
+            </div>
+            <div class="timer-buttons">
+                <button id="timerStartBtn" class="btn-control btn-start">Start</button>
+                <button id="timerPauseBtn" class="btn-control btn-pause" disabled>Pause</button>
+                <button id="timerResetBtn" class="btn-control btn-reset">Reset</button>
+            </div>
+        </section>
+
+        <!-- Alarm Tab -->
+        <section class="tab-content" id="alarm-tab">
+            <h1 class="main-title">🔔 Alarm</h1>
+            <div class="alarm-input-group">
+                <label>Set Alarm Time</label>
+                <div class="alarm-time-inputs">
+                    <input type="number" id="alarmHours" min="0" max="23" placeholder="HH">
+                    <span class="colon">:</span>
+                    <input type="number" id="alarmMinutes" min="0" max="59" placeholder="MM">
+                </div>
+                <button id="setAlarmBtn" class="btn-add">Set Alarm</button>
+            </div>
+            <div id="alarmsList" class="alarms-container">
+                <!-- Alarms will be listed here -->
+            </div>
+        </section>
+
+        <!-- Info Section -->
+        <section class="info-section">
+            <h2>About Time Zones</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>UTC/GMT</h3>
+                    <p>Coordinated Universal Time - the basis for civil time around the world.</p>
+                </div>
+                <div class="info-card">
+                    <h3>Daylight Saving</h3>
+                    <p>Some regions observe daylight saving time, shifting clocks forward during summer months.</p>
+                </div>
+                <div class="info-card">
+                    <h3>Time Zones</h3>
+                    <p>The world is divided into 24 main time zones, each roughly 15 degrees of longitude apart.</p>
+                </div>
+                <div class="info-card">
+                    <h3>International Date Line</h3>
+                    <p>An imaginary line that determines where the date changes - roughly follows the 180° meridian.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Notifications -->
+    <div id="notificationContainer" class="notification-container"></div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2026 Digital Clock | Made with ❤️ by Developers</p>
+    </footer>
+
+    <script src="clock-script.js"></script>
+</body>
+</html>
