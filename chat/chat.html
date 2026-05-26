@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat - SocialX</title>
+    <link rel="stylesheet" href="chat.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="chat-container">
+        <!-- Chat List -->
+        <aside class="chat-list">
+            <div class="chat-header">
+                <h2>Messages</h2>
+                <button><i class="fas fa-pen"></i></button>
+            </div>
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search conversations...">
+            </div>
+            <div id="conversationsList" class="conversations-list">
+                <!-- Conversations will be loaded here -->
+            </div>
+        </aside>
+
+        <!-- Chat Window -->
+        <main class="chat-window">
+            <div id="chatContent" class="chat-content">
+                <div class="empty-state">
+                    <i class="fas fa-comments"></i>
+                    <p>Select a conversation to start messaging</p>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="chat.js"></script>
+</body>
+</html>
